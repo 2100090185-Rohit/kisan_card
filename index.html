@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Card Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/bwip-js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+    <!-- QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;500;600;700&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Signika Negative', sans-serif;
+
+        }
+
+        .main {
+            background-color: rgb(1, 49, 90);
+        }
+
+        .main2 {
+            background-color: rgb(2, 81, 150);
+        }
+
+        .main3 {
+            background-color: rgb(0, 54, 101);
+        }
+
+        .main4 {
+            background-color: rgb(1, 51, 94);
+        }
+
+        textarea {
+            border-style: none;
+            border-radius: 10px;
+        }
+
+        .union_bank_card {
+            height: 7.7cm;
+            width: 11.93cm;
+            background-image: url(img/union_bank_bg.JPG);
+            background-position: center;
+            background-size: cover;
+            border: 4px rgb(6, 6, 6) solid;
+            position: relative;
+
+        }
+
+
+        .kisan_card {
+            height: 7.7cm;
+            width: 11.93cm;
+            background-image: url(img/kisan_card_bg.jpg);
+            background-position: center;
+            background-size: cover;
+            border: 4px rgb(0, 13, 190) solid;
+            position: relative;
+        }
+
+
+
+        .union_bank_card1 {
+            height: 100%;
+            width: 100%;
+            background-color: rgb(156, 170, 186);
+            border-radius: 3px;
+        }
+
+
+
+        label {
+            font-weight: 600;
+        }
+
+        p {
+            padding: 0;
+            margin: 0;
+
+
+        }
+
+        .union_bank_card p {
+            line-height: 120%;
+            font-size: 99%;
+        }
+
+
+
+        #kisan p {
+            font-weight: 400;
+            line-height: 115%;
+            font-size: 95%;
+        }
+
+        span {
+            font-weight: 600;
+        }
+
+        #kisan input {
+            padding: 1px;
+        }
+
+        .k_data {
+            position: relative;
+        }
+
+        #qrCode {
+            margin-left: 52%;
+            margin-top: 20%;
+            position: absolute;
+            height: 230px;
+            width: 230px;
+        }
+
+        #krishi_image {
+            margin-left: 81.1%;
+            margin-top: 32.5%;
+            position: absolute;
+            height: 150px;
+            width: 150px;
+        }
+
+        .blue_text {
+            color: rgb(0, 0, 153);
+        }
+
+        .pink_text {
+            color: rgb(234, 10, 130);
+        }
+
+        #k_name_size {
+            font-size: 300px;
+        }
+
+        #k_image {
+            border: 1px solid black;
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .name_fornt_size {
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Kisan Card -->
+    <div class="container-fluid main2 min-vh-100">
+        <div class="container" id="kisan">
+            <div class="row">
+                <h1 class="text-center text-white pt-3"> KISAN CARD</h1>
+            </div>
+            <div class="row d-flex justify-content-evenly">
+                <div class="col-sm-6 pt-2" id="print2">
+                    <div class="union_bank_card1 pt-3 ps-4">
+                        <div class="row">
+                            <div class="kisan_detail col ps-2">
+                                <div class="row">
+                                    <h5 class="ps-3 pb-2 pt-4">Kisan Regitrsation</h5>
+                                </div>
+                                <div>
+                                    <input placeholder="Name" id="k_name_input" type="text">
+                                </div>
+                                <div class="pt-3">
+                                    <select id="k_select_input">
+                                        <option value="Select" selected>Select</option>
+                                        <option value="W/O :">W/O</option>
+                                        <option value="S/O :">S/O</option>
+                                        <option value="S/O :">D/O</option>
+                                    </select>
+                                    <input placeholder="W/O or S/O Name" id="k_parent_input" type="text">
+                                </div>
+                                <div class="pt-3 d-flex">
+                                    <input placeholder="DOB" id="k_dob_input" type="text">
+                                </div>
+
+                                <div class="pt-3 d-flex">
+                                    <input placeholder="Aadhar Number" oninput="formatInput(this)" id="k_aadhar_input" type="text">
+                                </div>
+                                <div class="pt-3">
+                                    <input placeholder="Registration No." id="k_registration_input" type="tel">
+                                </div>
+                            </div>
+
+                            <div class="kisan_detail2 col ps-2 pt-4">
+                                <div class="row">
+                                    <h5 class="ps-3 pb-2">Kisan Details</h5>
+                                </div>
+                                <div class="pb-3">
+                                    <input placeholder="Registration Mob No." id="k_mobile_input" type="tel">
+                                </div>
+                                <div class="">
+                                    <span></span>
+                                    <select id="k_id_input" class="p-1">
+                                        <option value="Select" selected>PM-Kisan Status</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Spouse">Spouse</option>
+                                        <option value="Not Active">Not Apply</option>
+                                        <option value="Not Active">Reject</option>
+                                        <option value="Not Active">Other</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="pt-3">
+                                    <input placeholder="Address" id="k_address_input" type="text">
+                                </div>
+                                <div class="pt-3">
+                                    <input id="k_image_input" type="file" accept="image/*">
+                                </div>
+                                <div class="row">
+                                    <h5 class="pt-3">Insurance Details*</h5>
+                                </div>
+                                <div class="pb-2">
+                                    <input placeholder="Insurance Id" id="k_i_id_input" type="text">
+                                </div>
+                                <div>
+                                    <input placeholder="Password" id="k_password_input" type="text">
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <hr>
+                        <div class="d-flex justify-content-center ">
+                            <!-- <button type="reset" class="btn btn-secondary mt-3 mx-4">Reset</button> -->
+                            <button class="btn btn-success mb-3" onclick="displayUserInput2()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Design -->
+                <div class="col-sm-5 pt-4">
+
+                    <div class="kisan_card" id="k_card">
+                        <img class="img-fluid  w-100 d-flex" src="img/agri.jpg" alt="">
+                        <div class="row p-1">
+                            <div class="col-9">
+                                <div id="qrCode">
+                                    QR Code
+                                </div>
+                                <div id="krishi_image">
+                                    <img src="img/krishi.jpeg" alt="" height="80" width="80">
+                                </div>
+                                <div class="p-0 m-0">
+                                    <h5 class="text-center ps-5 mb-1 p-0 m-0 ms-5 text-success"> <strong><u>Kisan Card</u> </strong></h5>
+                                </div>
+
+                                <p> <span class="name_fornt_size">Name :</span> <span class="pink_text name_fornt_size" id="k_name">XXXX XXXX</span></p>
+                                <p>
+                                <p id="k_select" class="d-inline-block">Parent :</p></span> <span id="k_parent">XXXX XXXX</span>
+                                </p>
+                                <p>DOB : <span id="k_dob">DD/MM/YYYY</span></p>
+
+                                <p>Aadhar : <span id="k_aadhar" class="pink_text">XXXX-XXXX-XXXX</span></p>
+
+                                <label class="blue_text p-0"><u>Kisan Details</u> </label>
+                                <p>Reg Mob : <span id="k_mobile">XXXXXXXXXX</span></p>
+                                <p>PM-Kisan : <span id="k_id">XXXXXXXXXX</span></p>
+
+                                <p>Address : <span id="k_address">XXXX XXXX</span></p>
+                                <div class="ps-5 pt-2">
+                                    <h4 id="k_registration" class="text-center blue_text ps-5 ">XXXXXXXXXX</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-3 pt-2">
+                                <div class="p-0 m-0" id="k_image"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex m-4 pe-5 justify-content-center ">
+                        <button type="" id="k_download" class="btn btn-success mt-3">Download</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- UID Devide in 4 part -->
+    <script>
+        function formatInput(input) {
+            var value = input.value.replace(/-/g, ''); // Remove existing hyphens
+            var formattedValue = '';
+            for (var i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+            input.value = formattedValue;
+        }
+    </script>
+
+    <!-- DOB Format -->
+    <script>
+        function formatInputDOB(input) {
+            var value = input.value.replace(/-/g, ''); // Remove existing hyphens
+            var formattedValue = '';
+            for (var i = 0; i < value.length; i++) {
+                if (i > 0 && i % 2 === 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+            input.value = formattedValue;
+        }
+    </script>
+
+
+    <!-- Download Generated Card -->
+    <script>
+        document.getElementById("k_download").addEventListener("click", function () {
+            var divElement = document.getElementById("k_card");
+
+            // Create a new canvas with increased dimensions
+            var canvas = document.createElement("canvas");
+            canvas.width = divElement.offsetWidth * 7.5; // Increase width by a factor of 2
+            canvas.height = divElement.offsetHeight * 7.5; // Increase height by a factor of 2
+
+            // Scale the canvas context to match the increased dimensions
+            var context = canvas.getContext("2d");
+            context.scale(6, 6);
+
+            // Capture and download the div content as PNG
+            html2canvas(divElement, { canvas: canvas }).then(function (canvas) {
+                var imageDataURL = canvas.toDataURL("image/png");
+
+                var downloadLink = document.createElement("a");
+                downloadLink.href = imageDataURL;
+                downloadLink.download = "div_image.png";
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+        });
+
+
+        // Take Data From User and fetch in Card
+        function displayUserInput2() {
+            const k_name_input = document.getElementById("k_name_input").value;
+            const k_parent_input = document.getElementById("k_parent_input").value;
+            const k_dob_input = document.getElementById("k_dob_input").value;
+            const k_mobile_input = document.getElementById("k_mobile_input").value;
+            const k_aadhar_input = document.getElementById("k_aadhar_input").value;
+            const k_id_input = document.getElementById("k_id_input").value;
+            const k_password_input = document.getElementById("k_password_input").value;
+            const k_address_input = document.getElementById("k_address_input").value;
+            const k_registration_input = document.getElementById("k_registration_input").value;
+            const k_select_input = document.getElementById("k_select_input").value;
+            const k_i_id_input = document.getElementById("k_i_id_input").value;
+
+
+
+
+            document.getElementById("k_name").innerHTML = k_name_input;
+            document.getElementById("k_parent").innerHTML = k_parent_input;
+            document.getElementById("k_dob").innerHTML = k_dob_input;
+            document.getElementById("k_mobile").innerHTML = k_mobile_input;
+            document.getElementById("k_aadhar").innerHTML = k_aadhar_input;
+            document.getElementById("k_id").innerHTML = k_id_input;
+            document.getElementById("k_i_id_input").innerHTML = k_i_id_input;
+
+            document.getElementById("k_address").innerHTML = k_address_input;
+            document.getElementById("k_registration").innerHTML = k_registration_input;
+            document.getElementById("k_select").innerHTML = k_select_input;
+
+
+
+            // QR Code Generator
+            var data = "Jitendra Digital Studio \n" + "Name: " + k_name_input + "\n" + "Ins. ID: " + k_i_id_input + "\n" + "Password: " + k_password_input + "\n" + "Registration: " + k_registration_input;
+            var qr = qrcode(0, "L");
+            qr.addData(data);
+            qr.make();
+            var qrCodeDataUrl = qr.createDataURL();
+            var qrCodeImage = document.createElement("img");
+            qrCodeImage.src = qrCodeDataUrl;
+            var qrCodeElement = document.getElementById("qrCode");
+            qrCodeElement.innerHTML = '';
+            qrCodeElement.appendChild(qrCodeImage);
+
+
+
+            // Image Uploading
+            const input = document.getElementById("k_image_input");
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.width = "87.5px";
+                    img.style.height = "95px";
+                    document.getElementById("k_image").appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+    </script>
+
+
+
+    <div class="container-fluid main min-vh-100">
+        <div class="container py-4">
+            <div class="row">
+                <h1 class="text-center text-white">Union Bank Passbook</h1>
+            </div>
+            <div class="row d-flex justify-content-evenly">
+                <div class="col-sm-4 pt-4" id="print2">
+                    <div class="union_bank_card1 p-3 pt-4">
+                        <div>
+                            <label>NAME :</label>
+                            <input id="name_Input" type="text">
+                        </div>
+                        <div class="pt-4">
+                            <label for="">A/C NO :</label>
+                            <input id="account_input" type="text">
+                        </div>
+                        <div class="pt-4 d-flex">
+                            <label class="pe-2" for="">UID NO :</label>
+                            <input oninput="formatInput(this)" id="uid_input" type="text">
+                        </div>
+                        <div class="pt-4">
+                            <label for="">ADDRESS :</label>
+                            <input id="address_input" type="text">
+                        </div>
+                        <div class="pt-4 d-flex">
+                            <label class="pe-3" for="">IMAGE:</label>
+                            <input id="image_input" type="file" accept="image/*">
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-center pt-2">
+                            <!-- <button type="reset" class="btn btn-secondary mt-3 mx-4">Reset</button> -->
+                            <button class="btn btn-success" onclick="displayUserInput()">Generate</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Design -->
+                <div class="col-sm-5 pt-4">
+                    <div class="union_bank_card p-3" id="c_card">
+                        <div class="union_bank_card_bg">
+
+                        </div>
+                        <img class="img-fluid  w-75 mx-auto d-flex" src="img/Union_Bank_of_India_Logo.svg.png" alt="">
+                        <div class="row">
+                            <div class="col-9">
+                                <p class="pt-2"> NAME : <span id="c_name">XXXX XXXX</span></p>
+                                <p>A/C NO. : <span>42860</span><span id="c_account">XXXXXXXXXX</span></p>
+                                <p>UID NO : <span id="c_uid">XXXX-XXXX-XXXX</span></p>
+                                <p>IFSC CODE : <span id="c_ifsc">UBIN0542865</span></p>
+                                <p>ADDRESS : <span id="c_addess">XXXX XXXX</span></p>
+                                <p>BCA NAME : <span id="c_bca_name">JITENDRA KUMAR</span></p>
+                                <p>BCC CODE : <span id="c_bcc_code">54286512</span></p>
+                                <p>BCA POINT : <span id="c_bca_point">GHUSKITOLA, KISHANPUR</span></p>
+
+
+                            </div>
+                            <div class="col-3 pt-2">
+                                <div class="border border-dark" id="c_image"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center ">
+                        <button type="" id="download" class="btn btn-success mt-3">Download</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("download").addEventListener("click", function () {
+            var divElement = document.getElementById("c_card");
+
+            // Create a new canvas with increased dimensions
+            var canvas = document.createElement("canvas");
+            canvas.width = divElement.offsetWidth * 6; // Increase width by a factor of 2
+            canvas.height = divElement.offsetHeight * 6; // Increase height by a factor of 2
+
+            // Scale the canvas context to match the increased dimensions
+            var context = canvas.getContext("2d");
+            context.scale(4, 4);
+
+            // Capture and download the div content as PNG
+            html2canvas(divElement, { canvas: canvas }).then(function (canvas) {
+                var imageDataURL = canvas.toDataURL("image/png");
+
+                var downloadLink = document.createElement("a");
+                downloadLink.href = imageDataURL;
+                downloadLink.download = "div_image.png";
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            });
+        });
+
+
+        function displayUserInput() {
+            const name_Input = document.getElementById("name_Input").value;
+            const account_input = document.getElementById("account_input").value;
+            const uid_input = document.getElementById("uid_input").value;
+            const address_input = document.getElementById("address_input").value;
+
+            document.getElementById("c_name").innerHTML = name_Input;
+            document.getElementById("c_account").innerHTML = account_input;
+            document.getElementById("c_uid").innerHTML = uid_input;
+            document.getElementById("c_addess").innerHTML = address_input;
+
+
+            // Image Uploading
+            const input = document.getElementById("image_input");
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    const img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.width = "83.5px";
+                    img.style.height = "92px";
+                    document.getElementById("c_image").appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+
+</html>
